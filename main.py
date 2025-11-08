@@ -9,10 +9,19 @@
 import zmq
 
 def find_substring(input):
+    if input['substring'] == '':
+        return False
+    
     if input['substring'] in input['input']:
         return True
     else:
         return False
+    
+def numeric_check(input):
+    pass
+
+def length_check(input):
+    pass
 
 def main():
 
@@ -29,11 +38,24 @@ def main():
         input = socket.recv_json()
         results = []
 
+        # Quit early if no string is provided
+        if input['input'] == '':
+            results.append('No string provided')
+            socket.send_json(results)
+            continue
+
+
         # Perform substring check
-        if input['substring']:
+        if 'substring' in input:
             result = find_substring(input)
             if result is False:
                 results.append(f'\'{input['substring']}\' not in string')
+
+        # Perform numeric check
+        # CODE HERE
+
+        # Perform length check
+        # CODE HERE
 
         # Finalize the results
         if len(results) > 0:
