@@ -18,7 +18,11 @@ def find_substring(input):
         return False
     
 def numeric_check(input):
-    pass
+    try:
+        float(input)  # or int(s) for integers only
+        return True
+    except ValueError:
+        return False
 
 def length_check(input):
     pass
