@@ -18,11 +18,11 @@ def find_substring(input):
         return False
     
 def numeric_check(input):
-    try:
-        int(input)
-        return True
-    except ValueError:
-        return False
+    for character in input['input']:
+        try:
+            int(character)
+        except ValueError:
+            return False
 
 def length_check(input):
     pass
@@ -59,7 +59,7 @@ def main():
         if 'numeric' in input:
             result = numeric_check(input)
             if result is False:
-                results.append(f'The string is not strictly numeric')
+                results.append(f'String is not strictly numeric')
 
         # Perform length check
         # CODE HERE
