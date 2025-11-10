@@ -25,7 +25,15 @@ def numeric_check(input):
             return False
 
 def length_check(input):
-    pass
+        try:
+            str_len = len(input['input'])
+            if 'max' in input and int(input['max']) < str_len:
+                return False
+            if 'min' in input and int(input['min']) > str_len:
+                return False
+            return True
+        except:
+            return False
 
 def main():
 
@@ -62,7 +70,10 @@ def main():
                 results.append(f'String is not strictly numeric')
 
         # Perform length check
-        # CODE HERE
+        if 'min' in input or 'max' in input:
+            result = length_check(input)
+            if result is False:
+                results.append(f'String does not meet length requirements')
 
         # Finalize the results
         if len(results) > 0:
