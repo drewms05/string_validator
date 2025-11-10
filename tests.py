@@ -103,6 +103,32 @@ class TestStringValidator(unittest.TestCase):
         results = socket.recv_json()
         self.assertEqual(results, expected)
 
+    def test8(self):
+        """
+        Verifies numeric check where the string is strictly numeric.
+        """
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect('tcp://localhost:1234')
+        input = {'input': '752378524035', 'numeric': 'check'}
+        expected = ['String is valid']
+        socket.send_json(input)
+        results = socket.recv_json()
+        self.assertEqual(results, expected)
+
+    def test9(self):
+        """
+        Verifies numeric check where the string is not strictly numeric.
+        """
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect('tcp://localhost:1234')
+        input = {'input': '09853085g', 'numeric': 'check'}
+        expected = ['String is not valid', 'String is not strictly numeric']
+        socket.send_json(input)
+        results = socket.recv_json()
+        self.assertEqual(results, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
