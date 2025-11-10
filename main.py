@@ -19,7 +19,7 @@ def find_substring(input):
     
 def numeric_check(input):
     try:
-        float(input)  # or int(s) for integers only
+        int(input)
         return True
     except ValueError:
         return False
@@ -37,7 +37,7 @@ def main():
     # Continuously check for input
     while True:
 
-        # Recevie input
+        # Receive input
         input = None
         input = socket.recv_json()
         results = []
@@ -56,7 +56,10 @@ def main():
                 results.append(f'\'{input['substring']}\' not in string')
 
         # Perform numeric check
-        # CODE HERE
+        if 'numeric' in input:
+            result = numeric_check(input)
+            if result is False:
+                results.append(f'The string is not strictly numeric')
 
         # Perform length check
         # CODE HERE
