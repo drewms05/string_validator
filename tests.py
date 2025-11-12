@@ -129,6 +129,84 @@ class TestStringValidator(unittest.TestCase):
         results = socket.recv_json()
         self.assertEqual(results, expected)
 
+    def test10(self):
+        """
+        Verifies length check where the string is shorter than the minimum.
+        """
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect('tcp://localhost:1234')
+        input = {'input': '12345', 'min': '6'}
+        expected = ['String is not valid', 'String does not meet length requirements']
+        socket.send_json(input)
+        results = socket.recv_json()
+        self.assertEqual(results, expected)
+
+    def test11(self):
+        """
+        Verifies length check where the string is longer than the maximum.
+        """
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect('tcp://localhost:1234')
+        input = {'input': '12345', 'max': '4'}
+        expected = ['String is not valid', 'String does not meet length requirements']
+        socket.send_json(input)
+        results = socket.recv_json()
+        self.assertEqual(results, expected)
+
+    def test12(self):
+        """
+        Verifies length check where the string is in between the minimum and the maximum.
+        """
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect('tcp://localhost:1234')
+        input = {'input': '12345', 'min': '4', 'max': '6'}
+        expected = ['String is valid']
+        socket.send_json(input)
+        results = socket.recv_json()
+        self.assertEqual(results, expected)
+
+    def test13(self):
+        """
+        Verifies length check where the string is the same length as the minimum.
+        """
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect('tcp://localhost:1234')
+        input = {'input': '12345', 'min': '5'}
+        expected = ['String is valid']
+        socket.send_json(input)
+        results = socket.recv_json()
+        self.assertEqual(results, expected)
+
+    def test14(self):
+        """
+        Verifies length check where the string is the same length as the maximum.
+        """
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect('tcp://localhost:1234')
+        input = {'input': '12345', 'max': '5'}
+        expected = ['String is valid']
+        socket.send_json(input)
+        results = socket.recv_json()
+        self.assertEqual(results, expected)
+
+    def test15(self):
+        """
+        Verifies length check where the string is the same length as the minimum and the maximum.
+        """
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect('tcp://localhost:1234')
+        input = {'input': '12345', 'min': '5', 'max': '5'}
+        expected = ['String is valid']
+        socket.send_json(input)
+        results = socket.recv_json()
+        self.assertEqual(results, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
