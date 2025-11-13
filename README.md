@@ -34,10 +34,12 @@ To prepare your request, add your string to a python dictionary using the follow
 
 Use the following method to add parameters to your request:
 
+```
 input['numeric'] = 'check'
 input['substring'] = 'substring to look for'
 input['min'] = '2'
 input['max'] = '19'
+```
 
 After your request is configured to your liking, send it using the following code:
 
@@ -45,9 +47,9 @@ After your request is configured to your liking, send it using the following cod
 
 To receive the response, use the following code:
 
-```results = socket.recv_json```
+```results = socket.recv_json()```
 
-The string validation program will send a python array whose first value specifies if the string is valid or not.
+The string validation program will send a python array whose first value specifies whether or not the string is valid.
 If the string is not valid, additional values will specify what check(s) that it did not pass.
 
 ### Example
@@ -75,3 +77,9 @@ String is not valid
 String is not strictly numeric
 String does not meet length requirements
 ```
+
+## UML Sequence Diagram
+
+The following UML Sequence Diagram specifies the communication between the program and a requesting client
+
+![UML diagram for the datetime microservice](./resources/string_validator_uml.png)
