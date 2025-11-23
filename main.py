@@ -75,7 +75,9 @@ def check_input(input, method, message, results):
 
 
 def create_socket():
-    """Create a ZeroMQ socket that the client can connect to."""
+    """
+    Create a ZeroMQ socket that the client can connect to.
+    """
     context = zmq.Context()
     socket = context.socket(zmq.REP)
     socket.bind('tcp://localhost:1234')
@@ -83,7 +85,9 @@ def create_socket():
 
 
 def send_results(socket, results):
-    """Send the results to the client through a ZeroMQ connection."""
+    """
+    Send the results to the client through a ZeroMQ connection.
+    """
     # Insert an error message at the beginning of results
     # if any of the checks failed
     if len(results) > 0:
@@ -97,7 +101,9 @@ def send_results(socket, results):
 
 
 def perform_checks(input, results):
-    """Perform the necessary checks on the input string."""
+    """
+    Perform the necessary checks on the input string.
+    """
     # Perform substring check
     if 'substring' in input:
         check_input(input, find_substring,
@@ -113,7 +119,9 @@ def perform_checks(input, results):
 
 
 def main():
-    """Wait for input and return output."""
+    """
+    Wait for input and return output.
+    """
     socket = create_socket()
 
     # Continuously check for input
